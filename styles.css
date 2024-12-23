@@ -1,0 +1,60 @@
+main {
+    width: 50%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+table {
+    margin: 50px auto;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+th, td {
+    padding: 5px;
+}
+
+select {
+    padding: 5px;
+    margin: 0 10px;
+}
+
+.add-task-section {
+    margin-bottom: 20px;
+}
+
+/* Priority styles */
+.priority-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.priority-cell {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 5px 10px;
+}
+
+.very-important {
+    background-color: #ff4444;
+}
+
+.important {
+    background-color: #ffa700;
+}
+
+.not-important {
+    background-color: #69f0ae;
+}
+
+.priority-text {
+    margin-left: 5px;
+}

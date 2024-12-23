@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>To-Do List</title>
+</head>
+<body>
+    <main>
+        <div class="add-task-section">
+            <label>Task:</label>
+            <input type="text" id="name-input">
+            <label>Priority:</label>
+            <select id="priority-input">
+                <option value="not important">Not Important</option>
+                <option value="important">Important</option>
+                <option value="very important">Very Important</option>
+            </select>
+            <button id="add-name-btn">Add Task</button>
+        </div>
+        <br><br>
+        <div>
+           <input placeholder="search by name" id="search-input">
+           <button id="search-btn">Search</button>
+        </div>
+        <table id="table">
+            <thead>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Priority</th>
+                <th>Date Added</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <section hidden id="update-row">
+            <label>Task:</label>
+            <input type="text" id="update-name-input">
+            <label>Priority:</label>
+            <select id="update-priority-input">
+                <option value="not important">Not Important</option>
+                <option value="important">Important</option>
+                <option value="very important">Very Important</option>
+            </select>
+            <button id="update-row-btn">Update</button>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
