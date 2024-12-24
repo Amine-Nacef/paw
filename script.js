@@ -1,9 +1,45 @@
+// Check authentication on page load
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:5000/getAll')
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // Display username
+    const username = localStorage.getItem('username');
+    document.getElementById('username-display').textContent = `Welcome, ${username}!`;
+
+    // Load tasks
+    fetch('http://localhost:5000/getAll', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     .then(response => response.json())
     .then(data => loadHTMLTable(data['data']));
 });
 
+// Logout handler
+document.getElementById('logout-btn').addEventListener('click', function() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    window.location.href = 'login.html';
+});
+
+// Add authentication headers to all fetch requests
+function authenticatedFetch(url, options = {}) {
+    const token = localStorage.getItem('token');
+    return fetch(url, {
+        ...options,
+        headers: {
+            ...options.headers,
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
+// Update all fetch calls to use authenticatedFetch
 document.querySelector('table tbody').addEventListener('click', function(event) {
     if (event.target.className === "delete-row-btn") {
         deleteRowById(event.target.dataset.id);
@@ -18,13 +54,13 @@ const searchBtn = document.querySelector('#search-btn');
 
 searchBtn.onclick = function() {
     const searchValue = document.querySelector('#search-input').value;
-    fetch('http://localhost:5000/search/' + searchValue)
+    authenticatedFetch('http://localhost:5000/search/' + searchValue)
     .then(response => response.json())
     .then(data => loadHTMLTable(data['data']));
 }
 
 function deleteRowById(id) {
-    fetch('http://localhost:5000/delete/' + id, {
+    authenticatedFetch('http://localhost:5000/delete/' + id, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -45,10 +81,10 @@ updateBtn.onclick = function() {
     const updateNameInput = document.querySelector('#update-name-input');
     const updatePriorityInput = document.querySelector('#update-priority-input');
     
-    fetch('http://localhost:5000/update', {
+    authenticatedFetch('http://localhost:5000/update', {
         method: 'PATCH',
         headers: {
-            'Content-type' : 'application/json'
+            'Content-type': 'application/json'
         },
         body: JSON.stringify({
             id: updateNameInput.dataset.id,
@@ -61,7 +97,7 @@ updateBtn.onclick = function() {
         if (data.success) {
             location.reload();
         }
-    })
+    });
 }
 
 const addBtn = document.querySelector('#add-name-btn');
@@ -76,7 +112,7 @@ addBtn.onclick = function () {
     nameInput.value = "";
     priorityInput.value = "not important";
 
-    fetch('http://localhost:5000/insert', {
+    authenticatedFetch('http://localhost:5000/insert', {
         headers: {
             'Content-type': 'application/json'
         },

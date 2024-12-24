@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login - Todo List</title>
+</head>
+<body>
+    <main class="auth-container">
+        <div class="auth-box">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="auth-button">Login</button>
+                <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+            </form>
+            <div id="error-message" class="error-message"></div>
+        </div>
+    </main>
+    <script src="auth.js"></script>
+</body>
+</html>
